@@ -57,7 +57,7 @@
           <form id="reservationForm" name="reserve" action="index.html" method="get">
             <div class="formData">
               <label for="first">Prénom</label><br>
-              <input class="text-control error-input" type="text" id="first" name="first" minlength="2" /><br>
+              <input class="text-control" type="text" id="first" name="first" /><br>
               <label id="firstError" class="error-label" for="first">Veuillez entrer 2 caractères ou plus pour le champ du prénom.</label><br>
             </div>
             <div class="formData">
@@ -73,7 +73,7 @@
             <div class="formData">
               <label for="birthdate">Date de naissance</label><br>
               <input class="text-control" type="date" id="birthdate" name="birthdate" /><br>
-              <label id="birthdateError" class="error-label" for="birthdate">Vous devez entrer votre date de naissance.</label><br>
+              <label id="birthDateError" class="error-label" for="birthdate">Vous devez entrer votre date de naissance.</label><br>
             </div>
             <div class="formData">
               <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
@@ -107,7 +107,7 @@
                 <span class="checkbox-icon"></span>
                 Portland</label>
             </div>
-            <p id="radioError" class="error-label">Veuillez entrer 2 caractères ou plus pour le champ du prénom</p><br>
+            <p id="locationError" class="error-label">Vous devez choisir une option.</p><br>
 
 
             <div class="formData">
@@ -116,7 +116,7 @@
                 <span class="checkbox-icon"></span>
                 J'ai lu et accepté les conditions d'utilisation.
               </label><br>
-              <label id="quantityError" class="error-label" for="quantity">Vous devez vérifier que vous acceptez les termes et conditions.</label>
+              <label id="cguErrorLabel" class="error-label" for="checkbox1">Vous devez vérifier que vous acceptez les termes et conditions.</label>
               <br>
               <input class="checkbox-input" type="checkbox" id="checkbox2" />
               <label class="checkbox2-label" for="checkbox2">
