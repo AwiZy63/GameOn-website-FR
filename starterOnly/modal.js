@@ -40,7 +40,7 @@ function validate(event) {
   const birthDate = document.getElementById("birthdate");
   const quantity = document.getElementById("quantity");
   const checkbox = document.querySelectorAll(".radio-input");
-  const cguCheckBox = document.getElementById("checkbox1");
+  const cgu = document.getElementById("checkbox1");
 
   const data = {
     firstName: firstName.value,
@@ -66,103 +66,39 @@ function validate(event) {
   !data.birthDate || selectedBirthDate.getFullYear() > currentDate.getFullYear() - 16 ? error.birthDate = true : error.birthDate = false;
   data.quantity === "" || !data.quantity.match(numberRegex) || data.quantity < 0 || data.quantity > 99 ? error.quantity = true : error.quantity = false;
   isChecked.length <= 0 ? error.location = true : error.location = false;
-  !cguCheckBox.checked ? error.cgu = true : error.cgu = false;  
+  !cgu.checked ? error.cgu = true : error.cgu = false;
 
-  // Error check and define firstname
-  const firstNameErrorLabel = document.getElementById("firstError");
-  if (error.firstName) {
-    if (firstName.classList[1] !== "error-input") {
-      firstName.classList.toggle("error-input");
-      firstNameErrorLabel.style.display = "inline-block";
-    }
-  } else {
-    if (firstName.classList[1] === "error-input") {
-      firstName.classList.toggle("error-input");
-      firstNameErrorLabel.style.display = "none";
+
+  let errorsTypes = [firstName, lastName, email, birthDate, quantity]
+
+  const createError = (element, errorName) => {
+    let errorLabel = [];
+    errorLabel[errorName] = document.getElementById(`${errorName}Error`);
+    if (error[errorName]) {
+      if (errorLabel[errorName].style.display !== "inline-block") {
+        if (element.type) {
+          element.classList.toggle("error-input");
+        }
+        errorLabel[errorName].style.display = "inline-block";
+      }
+    } else {
+      if (errorLabel[errorName].style.display === "inline-block") {
+        if (element.type) {
+          element.classList.toggle("error-input");
+        }
+        errorLabel[errorName].style.display = "none";
+      }
     }
   }
 
-  // Error check and define lastname
-  const lastNameErrorLabel = document.getElementById("lastError");
-  if (error.lastName) {
-    if (lastName.classList[1] !== "error-input") {
-      lastName.classList.toggle("error-input");
-      lastNameErrorLabel.style.display = "inline-block";
-    }
-  } else {
-    if (lastName.classList[1] === "error-input") {
-      lastName.classList.toggle("error-input");
-      lastNameErrorLabel.style.display = "none";
-    }
-  }
-
-  // Error check and define email
-  const emailErrorLabel = document.getElementById("emailError");
-  if (error.email) {
-    if (email.classList[1] !== "error-input") {
-      email.classList.toggle("error-input");
-      emailErrorLabel.style.display = "inline-block";
-    }
-  } else {
-    if (email.classList[1] === "error-input") {
-      email.classList.toggle("error-input");
-      emailErrorLabel.style.display = "none";
-    }
-  }
-
-  // Error check and define birthDate
-  const birthDateErrorLabel = document.getElementById("birthDateError");
-  if (error.birthDate) {
-    if (birthDate.classList[1] !== "error-input") {
-      birthDate.classList.toggle("error-input");
-      birthDateErrorLabel.style.display = "inline-block";
-    }
-  } else {
-    if (birthDate.classList[1] === "error-input") {
-      birthDate.classList.toggle("error-input");
-      birthDateErrorLabel.style.display = "none";
-    }
-  }
-
-  // Error check and define quantity
-  const quantityErrorLabel = document.getElementById("quantityError");
-  if (error.quantity) {
-    if (quantity.classList[1] !== "error-input") {
-      quantity.classList.toggle("error-input");
-      quantityErrorLabel.style.display = "inline-block";
-    }
-  } else {
-    if (quantity.classList[1] === "error-input") {
-      quantity.classList.toggle("error-input");
-      quantityErrorLabel.style.display = "none";
-    }
-  }
-
-  // Error check and define location
-  const locationErrorLabel = document.getElementById("locationError");
-  if (error.location) {
-    if (locationErrorLabel.style.display !== "inline-block") {
-      locationErrorLabel.style.display = "inline-block";
-    }
-  } else {
-    if (locationErrorLabel.style.display === "inline-block") {
-      locationErrorLabel.style.display = "none";
-    }
-  }
-
-  // Error check and define cgu
-  const cguErrorLabel = document.getElementById("cguErrorLabel");
-  if (error.cgu) {
-    if (cguErrorLabel.style.display !== "inline-block") {
-      cguErrorLabel.style.display = "inline-block";
-    }
-  } else {
-    if (cguErrorLabel.style.display === "inline-block") {
-      cguErrorLabel.style.display = "none";
-    }
-  }
+  createError(firstName, "firstName")
+  createError(lastName, "lastName")
+  createError(email, "email")
+  createError(birthDate, "birthDate")
+  createError(quantity, "quantity")
+  createError(isChecked, "location")
+  createError(cgu, "cgu")
 
   !error.firstName && !error.lastName && !error.email && !error.birthDate && !error.location && !error.quantity && !error.cgu ? alert("Merci ! Votre réservation a été reçue.") : event.preventDefault();
-
 
 }
