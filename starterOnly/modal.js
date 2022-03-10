@@ -66,7 +66,7 @@ function validate(event) {
   !data.birthDate || selectedBirthDate.getFullYear() > currentDate.getFullYear() - 16 ? error.birthDate = true : error.birthDate = false;
   data.quantity === "" || !data.quantity.match(numberRegex) || data.quantity < 0 || data.quantity > 99 ? error.quantity = true : error.quantity = false;
   isChecked.length <= 0 ? error.location = true : error.location = false;
-  !cguCheckBox ? error.cgu = true : error.cgu = false;  
+  !cguCheckBox.checked ? error.cgu = true : error.cgu = false;  
 
   // Error check and define firstname
   const firstNameErrorLabel = document.getElementById("firstError");
