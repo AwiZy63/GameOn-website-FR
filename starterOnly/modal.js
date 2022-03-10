@@ -86,7 +86,7 @@ function validate(event) {
 
   const createError = (element, errorName) => {
     // Création d'un tableau pour l'insertion d'une variable temporaire pour la fonction.
-    let errorLabel = [];
+    const errorLabel = [];
     // Insertion d'une variable temporaire dans le tableau précédent pour la fonction par rapport au nom de l'erreur.
     errorLabel[errorName] = document.getElementById(`${errorName}Error`);
     // Condition ternaire qui vérifie si l'erreur correspondant est oui ou non activée.
