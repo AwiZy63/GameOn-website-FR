@@ -120,7 +120,30 @@ function validate(event) {
   createError(quantity, "quantity")
   createError(isChecked, "location")
   createError(cgu, "cgu")
-  
+
   // Vérification des conditions de validation du formulaire et envoi. (Le fomulaire ne s'envoit pas si les conditions ne sont pas respectés).
-  Object.keys(error).length === 0 ? alert("Merci ! Votre réservation a été reçue.") : event.preventDefault();
+  Object.keys(error).length === 0 ? confirmForm(event) : event.preventDefault();
+}
+
+function confirmForm(event) {
+  event.preventDefault();
+  
+  reservationForm.style.display = 'none';
+  const modalBody = document.querySelector(".modal-body");
+  
+  const button = document.createElement("button");
+  button.innerText = "C'est parti"
+  button.classList.add("btn-submit");
+  button.classList.add("button");
+  button.style.marginTop = "24px";
+
+  const p = document.createElement("p");
+  p.innerText = "Merci, votre inscription a été prise en compte !";
+  p.style.marginTop = "16px";
+  p.style.marginBottom = "16px";
+
+  modalBody.appendChild(p);
+  p.append(button);
+
+  button.addEventListener("click", () => reservationForm.submit())
 }
