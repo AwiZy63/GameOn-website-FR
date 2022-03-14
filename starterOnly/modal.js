@@ -13,21 +13,13 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
-}
+modalBtn.forEach((btn) => btn.addEventListener("click", () => modalbg.style.display = "block"));
 
 // close modal function
 const modalCloseButton = document.getElementById("modalCloseButton");
 
-modalCloseButton.addEventListener("click", closeModal);
-function closeModal() {
-  // set modal style to display none when close button clicked
-  modalbg.style.display = "none";
-}
+// set modal style to display none when close button clicked
+modalCloseButton.addEventListener("click", () => modalbg.style.display = "none");
 
 const reservationForm = document.getElementById("reservationForm");
 reservationForm.addEventListener("submit", (event) => validate(event))
