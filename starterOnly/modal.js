@@ -62,19 +62,19 @@ function validate(event) {
 
   // Création des conditions d'envoi du formulaire.
   // Le champs du prénom ne doit pas être vide et doit comporter au minimum 2 caractères.
-  data.firstName === "" || data.firstName.length < 2 ? error.firstName = true : error.firstName = false;
+  data.firstName === "" || data.firstName.length < 2 ? error.firstName = true : null;
   // Le champs de nom de famille ne doit pas être vide et doit comporter au minimum 2 caractères.
-  data.lastName === "" || data.lastName.length < 2 ? error.lastName = true : error.lastName = false;
+  data.lastName === "" || data.lastName.length < 2 ? error.lastName = true : null;
   // Le champs de l'email ne doit pas être vide et doit correspondre au regex d'une email valide (voir ligne 60).
-  data.email === "" || !data.email.match(emailRegex) ? error.email = true : error.email = false;
+  data.email === "" || !data.email.match(emailRegex) ? error.email = true : null;
   // La date de naissance doit être selectionnée et l'utilisateur doit avoir au moins 16 ans.
-  !data.birthDate || selectedBirthDate.getFullYear() > currentDate.getFullYear() - 16 ? error.birthDate = true : error.birthDate = false;
+  !data.birthDate || selectedBirthDate.getFullYear() > currentDate.getFullYear() - 16 ? error.birthDate = true : null;
   // Le nombre de participation doit être renseignée et doit correspondre au regex qui indique que la donnée rentrée doit être un nombre valide (voir ligne 62) entre 0 et 99.
-  data.quantity === "" || !data.quantity.match(numberRegex) || data.quantity < 0 || data.quantity > 99 ? error.quantity = true : error.quantity = false;
+  data.quantity === "" || !data.quantity.match(numberRegex) || data.quantity < 0 || data.quantity > 99 ? error.quantity = true : null;
   // Une option de localisation doit être selectionnée.
-  isChecked.length <= 0 ? error.location = true : error.location = false;
+  isChecked.length <= 0 ? error.location = true : null;
   // La case des conditions générales d'utilisations doit être cochée
-  !cgu.checked ? error.cgu = true : error.cgu = false;
+  !cgu.checked ? error.cgu = true : null;
 
   const createError = (element, errorName) => {
     // Création d'un tableau pour l'insertion d'une variable temporaire pour la fonction.
@@ -120,8 +120,7 @@ function validate(event) {
   createError(quantity, "quantity")
   createError(isChecked, "location")
   createError(cgu, "cgu")
-
+  
   // Vérification des conditions de validation du formulaire et envoi. (Le fomulaire ne s'envoit pas si les conditions ne sont pas respectés).
-  !error.firstName && !error.lastName && !error.email && !error.birthDate && !error.location && !error.quantity && !error.cgu ? alert("Merci ! Votre réservation a été reçue.") : event.preventDefault();
-
+  Object.keys(error).length === 0 ? alert("Merci ! Votre réservation a été reçue.") : event.preventDefault();
 }
